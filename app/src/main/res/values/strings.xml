@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">SmartHome</string>
+    <string name="dashboard_title">Smart Home Control</string>
+    <string name="temperature_label">Temperature: N/A</string>
+    <string name="humidity_label">Humidity: N/A</string>
+    <string name="green_led_label">Green LED: OFF</string>
+    <string name="red_led_label">Red LED: OFF</string>
+    <string name="yellow_led_label">Yellow LED: OFF</string>
+    <string name="relay_label">Relay: OFF</string>
+    <string name="toggle_relay">Toggle Relay</string>
+    <string name="set_thresholds">Set Thresholds</string>
+    <string name="toggle_theme">Toggle Theme</string>
+    <string name="manage_devices">Manage Devices</string>
+    <string name="view_history">View History</string>
+    <string name="device_details">Device Details</string>
+    <string name="tab_dashboard">Dashboard</string>
+    <string name="tab_devices">Devices</string>
+    <string name="tab_alerts">Alerts</string>
+    <string name="tab_history">History</string>
+    <string name="theme_toggle_desc">Toggle Theme</string>
+</resources>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_light_grey">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@color/white"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:id="@+id/tab_dashboard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tab_dashboard"
+            android:textColor="?attr/colorPrimary"
+            android:textAlignment="center"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/tab_devices"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tab_devices"
+            android:textColor="@color/text_grey"
+            android:textAlignment="center"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/tab_alerts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tab_alerts"
+            android:textColor="@color/text_grey"
+            android:textAlignment="center"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/tab_history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tab_history"
+            android:textColor="@color/text_grey"
+            android:textAlignment="center"
+            android:padding="8dp" />
+
+        <Switch
+            android:id="@+id/theme_toggle"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="Dark"
+            android:contentDescription="Toggle Theme"
+            android:gravity="center"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:navGraph="@navigation/nav_graph" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="@color/white"
+        android:layout_marginTop="2dp">
+
+        <ImageView
+            android:id="@+id/nav_user"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_user"
+            android:contentDescription="Profile"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/nav_file"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_file"
+            android:contentDescription="Files"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/nav_bell"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_notification"
+            android:contentDescription="Notifications"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/nav_search"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_search"
+            android:contentDescription="Search"
+            android:gravity="center" />
+
+
+        <ImageView
+            android:id="@+id/nav_chat"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_chat"
+            android:contentDescription="Chat"
+            android:gravity="center" />
+
+    </LinearLayout>
+</LinearLayout>

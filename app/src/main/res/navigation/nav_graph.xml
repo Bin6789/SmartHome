@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.smarthome.MainFragment"
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_devicesFragment"
+            app:destination="@id/devicesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_alertsFragment"
+            app:destination="@id/alertsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_filesFragment"
+            app:destination="@id/filesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_deviceDetailsFragment"
+            app:destination="@id/deviceDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/devicesFragment"
+        android:name="com.example.smarthome.DevicesFragment"
+        android:label="DevicesFragment">
+        <action
+            android:id="@+id/action_devicesFragment_to_deviceDetailsFragment"
+            app:destination="@id/deviceDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/alertsFragment"
+        android:name="com.example.smarthome.AlertsFragment"
+        android:label="AlertsFragment" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.smarthome.HistoryFragment"
+        android:label="HistoryFragment" />
+    <fragment
+        android:id="@+id/filesFragment"
+        android:name="com.example.smarthome.FilesFragment"
+        android:label="FilesFragment" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.smarthome.NotificationsFragment"
+        android:label="NotificationsFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.smarthome.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.smarthome.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.smarthome.ChatFragment"
+        android:label="ChatFragment" />
+    <fragment
+        android:id="@+id/deviceDetailsFragment"
+        android:name="com.example.smarthome.DeviceDetailsFragment"
+        android:label="DeviceDetailsFragment">
+        <argument
+            android:name="deviceId"
+            app:argType="string"
+            android:defaultValue="DEV001" />
+    </fragment>
+</navigation>
