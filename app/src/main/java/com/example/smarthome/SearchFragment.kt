@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.search_results)
         recyclerView.layoutManager = LinearLayoutManager(context)
         deviceAdapter = DeviceAdapter(devices) { device ->
-            val intent = Intent(context, DeviceDetailsActivity::class.java)
+            val intent = Intent(context, DeviceDetailsFragment::class.java)
             intent.putExtra("deviceId", device.id)
             startActivity(intent)
         }

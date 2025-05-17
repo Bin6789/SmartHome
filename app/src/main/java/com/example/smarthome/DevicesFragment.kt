@@ -28,7 +28,7 @@ class DevicesFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.devices_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(context)
         deviceAdapter = DeviceAdapter(devices) { device ->
-            val intent = Intent(context, DeviceDetailsActivity::class.java)
+            val intent = Intent(context, DeviceDetailsFragment::class.java)
             intent.putExtra("deviceId", device.id)
             startActivity(intent)
         }
