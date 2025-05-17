@@ -70,16 +70,16 @@ class DeviceDetailsFragment : Fragment() {
         }
 
         // Thêm listener cho Firebase
-        database.reference.child("SmartHomeApp/devices/$deviceId")
+        database.reference.child("/devices/$deviceId")
             .addValueEventListener(valueEventListener!!)
 
         // Xử lý sự kiện thay đổi trạng thái Switch
         relaySwitch.setOnCheckedChangeListener { _, isChecked ->
-            database.reference.child("SmartHomeApp/devices/$deviceId/relay").setValue(isChecked)
+            database.reference.child("/devices/$deviceId/relay").setValue(isChecked)
         }
 
         ledSwitch.setOnCheckedChangeListener { _, isChecked ->
-            database.reference.child("SmartHomeApp/devices/$deviceId/led").setValue(isChecked)
+            database.reference.child("/devices/$deviceId/led").setValue(isChecked)
         }
     }
 
@@ -87,7 +87,7 @@ class DeviceDetailsFragment : Fragment() {
         super.onDestroyView()
         // Gỡ bỏ listener để tránh rò rỉ bộ nhớ
         valueEventListener?.let {
-            database.reference.child("SmartHomeApp/devices").removeEventListener(it)
+            database.reference.child("/devices").removeEventListener(it)
         }
     }
 }

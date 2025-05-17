@@ -18,4 +18,5 @@
     <string name="tab_alerts">Alerts</string>
     <string name="tab_history">History</string>
     <string name="theme_toggle_desc">Toggle Theme</string>
+    <string name="alerts_count_label">Số lượng cảnh báo: %d</string>
 </resources>

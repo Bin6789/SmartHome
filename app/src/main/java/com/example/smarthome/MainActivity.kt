@@ -2,6 +2,7 @@ package com.example.smarthome
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
@@ -21,8 +22,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Khởi tạo NavController từ NavHostFragment
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+        if (navHostFragment == null) {
+            Log.e("MainActivity", "NavHostFragment không tìm thấy. Kiểm tra activity_main.xml")
+            return
+        }
         navController = navHostFragment.navController
+        Log.d("MainActivity", "NavController khởi tạo thành công")
 
         // Thiết lập điều hướng cho các tab và nút điều hướng
         setupTabNavigation()
@@ -71,23 +77,68 @@ class MainActivity : AppCompatActivity() {
         val navChat = findViewById<ImageView>(R.id.nav_chat)
 
         navFile.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_filesFragment)
+            val currentDestination = navController.currentDestination?.id
+            Log.d("MainActivity", "Đích hiện tại: $currentDestination")
+            if (currentDestination != R.id.filesFragment) {
+                if (currentDestination != R.id.mainFragment) {
+                    Log.d("MainActivity", "Quay lại mainFragment")
+                    navController.popBackStack(R.id.mainFragment, false)
+                }
+                Log.d("MainActivity", "Điều hướng đến filesFragment")
+                navController.navigate(R.id.action_mainFragment_to_filesFragment)
+            }
         }
 
         navBell.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_notificationsFragment)
+            val currentDestination = navController.currentDestination?.id
+            Log.d("MainActivity", "Đích hiện tại: $currentDestination")
+            if (currentDestination != R.id.notificationsFragment) {
+                if (currentDestination != R.id.mainFragment) {
+                    Log.d("MainActivity", "Quay lại mainFragment")
+                    navController.popBackStack(R.id.mainFragment, false)
+                }
+                Log.d("MainActivity", "Điều hướng đến notificationsFragment")
+                navController.navigate(R.id.action_mainFragment_to_notificationsFragment)
+            }
         }
 
         navSearch.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_searchFragment)
+            val currentDestination = navController.currentDestination?.id
+            Log.d("MainActivity", "Đích hiện tại: $currentDestination")
+            if (currentDestination != R.id.searchFragment) {
+                if (currentDestination != R.id.mainFragment) {
+                    Log.d("MainActivity", "Quay lại mainFragment")
+                    navController.popBackStack(R.id.mainFragment, false)
+                }
+                Log.d("MainActivity", "Điều hướng đến searchFragment")
+                navController.navigate(R.id.action_mainFragment_to_searchFragment)
+            }
         }
 
         navUser.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_profileFragment)
+            val currentDestination = navController.currentDestination?.id
+            Log.d("MainActivity", "Đích hiện tại: $currentDestination")
+            if (currentDestination != R.id.profileFragment) {
+                if (currentDestination != R.id.mainFragment) {
+                    Log.d("MainActivity", "Quay lại mainFragment")
+                    navController.popBackStack(R.id.mainFragment, false)
+                }
+                Log.d("MainActivity", "Điều hướng đến profileFragment")
+                navController.navigate(R.id.action_mainFragment_to_profileFragment)
+            }
         }
 
         navChat.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_chatFragment)
+            val currentDestination = navController.currentDestination?.id
+            Log.d("MainActivity", "Đích hiện tại: $currentDestination")
+            if (currentDestination != R.id.chatFragment) {
+                if (currentDestination != R.id.mainFragment) {
+                    Log.d("MainActivity", "Quay lại mainFragment")
+                    navController.popBackStack(R.id.mainFragment, false)
+                }
+                Log.d("MainActivity", "Điều hướng đến chatFragment")
+                navController.navigate(R.id.action_mainFragment_to_chatFragment)
+            }
         }
     }
 

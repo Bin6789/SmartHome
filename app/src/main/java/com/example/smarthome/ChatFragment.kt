@@ -33,7 +33,7 @@ class ChatFragment : Fragment() {
         messageAdapter = MessageAdapter(messages)
         recyclerView.adapter = messageAdapter
 
-        database.reference.child("SmartHomeApp/chats/CHAT001/messages")
+        database.reference.child("/chats/CHAT001/messages")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     messages.clear()
@@ -58,7 +58,7 @@ class ChatFragment : Fragment() {
                     text = text,
                     timestamp = System.currentTimeMillis().toString()
                 )
-                database.reference.child("SmartHomeApp/chats/CHAT001/messages")
+                database.reference.child("/chats/CHAT001/messages")
                     .push().setValue(message)
                 messageInput.text.clear()
             }

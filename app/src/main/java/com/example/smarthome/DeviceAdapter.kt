@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 class DeviceAdapter(
@@ -33,8 +34,24 @@ class DeviceAdapter(
     override fun getItemCount(): Int = devices.size
 
     fun updateDevices(newDevices: List<Device>) {
+        val diffCallback = DeviceDiffCallback(devices, newDevices)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         devices.clear()
         devices.addAll(newDevices)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    private class DeviceDiffCallback(
+        private val oldList: List<Device>,
+        private val newList: List<Device>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int = oldList.size
+        override fun getNewListSize(): Int = newList.size
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
     }
 }

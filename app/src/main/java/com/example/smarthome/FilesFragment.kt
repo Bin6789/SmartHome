@@ -53,7 +53,7 @@ class FilesFragment : Fragment() {
     }
 
     private fun loadFiles(userId: String) {
-        val storageRef = storage.reference.child("SmartHomeApp/files/$userId")
+        val storageRef = storage.reference.child("/files/$userId")
         storageRef.listAll()
             .addOnSuccessListener { result ->
                 // Xóa danh sách cũ

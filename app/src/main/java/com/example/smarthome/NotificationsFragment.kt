@@ -32,7 +32,7 @@ class NotificationsFragment : Fragment() {
         recyclerView.adapter = notificationAdapter
 
         if (auth.currentUser != null) {
-            database.reference.child("SmartHomeApp/notifications/${auth.currentUser!!.uid}")
+            database.reference.child("/notifications/${auth.currentUser!!.uid}")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         notifications.clear()

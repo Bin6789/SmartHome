@@ -1,10 +1,12 @@
 package com.example.smarthome
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -16,7 +18,7 @@ class HistoryFragment : Fragment() {
 
     private lateinit var historyAdapter: HistoryAdapter
     private val historyEntries = mutableListOf<HistoryEntry>()
-    private val database = FirebaseDatabase.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
+    private lateinit var deviceViewModel: DeviceViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,21 +31,14 @@ class HistoryFragment : Fragment() {
         historyAdapter = HistoryAdapter(historyEntries)
         recyclerView.adapter = historyAdapter
 
-        val deviceId = arguments?.getString("deviceId") ?: "DEV001"
-        database.reference.child("SmartHomeApp/history/$deviceId")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val history = snapshot.children.mapNotNull {
-                        val action = it.child("action").getValue(String::class.java) ?: ""
-                        val state = it.child("state").getValue(Boolean::class.java) ?: false
-                        val timestamp = it.child("timestamp").getValue(String::class.java) ?: ""
-                        HistoryEntry(action, state, timestamp)
-                    }.sortedByDescending { it.timestamp.toLongOrNull() ?: 0L }
-                    historyAdapter.updateHistory(history)
-                }
+        deviceViewModel = ViewModelProvider(this).get(DeviceViewModel::class.java)
+        deviceViewModel.historyData.observe(viewLifecycleOwner) { history ->
+            historyAdapter.updateHistory(history)
+            Log.d("HistoryFragment", "History updated: ${history.size} entries")
+        }
 
-                override fun onCancelled(error: DatabaseError) {}
-            })
+        val deviceId = arguments?.getString("deviceId") ?: "DEV001"
+        deviceViewModel.observeHistory(deviceId)
 
         return view
     }

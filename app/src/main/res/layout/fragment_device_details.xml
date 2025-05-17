@@ -42,6 +42,7 @@
         android:layout_gravity="left"
         android:layout_marginBottom="16dp"
         android:text="LED"
+        android:textColor="@color/text_grey"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
@@ -51,6 +52,7 @@
         android:layout_gravity="left"
         android:layout_marginBottom="16dp"
         android:text="Relay"
+        android:textColor="@color/text_grey"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <com.github.mikephil.charting.charts.LineChart
