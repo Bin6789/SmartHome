@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class DeviceViewModel : ViewModel() {
-    private val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseDatabase.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
     private val _deviceList = MutableLiveData<List<Device>>()
     private val _deviceData = MutableLiveData<DeviceData>()
     private val _alertCount = MutableLiveData<Int>()

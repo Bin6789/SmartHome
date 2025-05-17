@@ -16,6 +16,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="16dp" />
 
+    <!-- Devices Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/devices_card"
         android:layout_width="match_parent"
@@ -37,14 +38,24 @@
                 android:textSize="18sp"
                 android:textColor="?attr/colorPrimary" />
 
-            <LinearLayout
-                android:id="@+id/devices_list"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/devices_count"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:text="0"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/devices_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACTIVE 0"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Alerts Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/alerts_card"
         android:layout_width="match_parent"
@@ -66,14 +77,24 @@
                 android:textSize="18sp"
                 android:textColor="?attr/colorPrimary" />
 
-            <LinearLayout
-                android:id="@+id/alerts_list"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/alerts_count"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:text="0"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/alerts_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACTIVE 0"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- History Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/history_card"
         android:layout_width="match_parent"
@@ -94,11 +115,20 @@
                 android:textSize="18sp"
                 android:textColor="?attr/colorPrimary" />
 
-            <LinearLayout
-                android:id="@+id/history_list"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/history_count"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:text="0"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/history_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RECORDED 0"
+                android:layout_marginTop="2dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

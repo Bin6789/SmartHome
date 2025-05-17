@@ -19,7 +19,7 @@ class ChatFragment : Fragment() {
 
     private lateinit var messageAdapter: MessageAdapter
     private val messages = mutableListOf<Message>()
-    private val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseDatabase.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
     private val auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(

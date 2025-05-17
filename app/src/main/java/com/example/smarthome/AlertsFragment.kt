@@ -13,7 +13,7 @@ import com.google.firebase.database.ValueEventListener
 
 class AlertsFragment : Fragment() {
 
-    private val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseDatabase.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

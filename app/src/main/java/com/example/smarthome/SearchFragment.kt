@@ -20,7 +20,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var deviceAdapter: DeviceAdapter
     private val devices = mutableListOf<Device>()
-    private val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseDatabase.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

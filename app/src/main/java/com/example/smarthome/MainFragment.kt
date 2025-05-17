@@ -53,9 +53,9 @@ class MainFragment : Fragment() {
             view.findViewById<TextView>(R.id.alerts_count).text = count.toString()
             view.findViewById<TextView>(R.id.alerts_status).text = "ACTIVE $count"
         }
-
-        viewModel.observeHistoryCount()
-        viewModel.historyCount.observe(viewLifecycleOwner) { count ->
+        val deviceId = "DEV001"
+        viewModel.observeHistory(deviceId)
+        viewModel.historyData.observe(viewLifecycleOwner) { count ->
             view.findViewById<TextView>(R.id.history_count).text = count.toString()
             view.findViewById<TextView>(R.id.history_status).text = "RECORDED $count"
         }

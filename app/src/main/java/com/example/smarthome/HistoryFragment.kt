@@ -16,7 +16,7 @@ class HistoryFragment : Fragment() {
 
     private lateinit var historyAdapter: HistoryAdapter
     private val historyEntries = mutableListOf<HistoryEntry>()
-    private val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseDatabase.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

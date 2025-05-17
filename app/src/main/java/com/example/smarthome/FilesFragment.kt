@@ -15,7 +15,7 @@ class FileFragment : Fragment() {
 
     private lateinit var fileAdapter: FileAdapter
     private val files = mutableListOf<FileItem>()
-    private val storage = FirebaseStorage.getInstance()
+    private val storage = FirebaseStorage.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
     private val auth = FirebaseAuth.getInstance()
 
     override fun onCreateView(

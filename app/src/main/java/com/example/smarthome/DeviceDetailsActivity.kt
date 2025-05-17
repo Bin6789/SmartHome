@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener
 
 class DeviceDetailsActivity : AppCompatActivity() {
 
-    private val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseDatabase.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreate(savedInstanceState: Bundle?) {
