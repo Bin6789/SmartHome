@@ -23,9 +23,7 @@
         android:inputType="textEmailAddress"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
-        android:background="@android:drawable/editbox_background"
-        android:textColor="#000000"
-        android:textColorHint="#666666"/>
+        android:background="@android:drawable/editbox_background" />
 
     <EditText
         android:id="@+id/password_input"
@@ -35,9 +33,7 @@
         android:inputType="textPassword"
         android:padding="12dp"
         android:layout_marginBottom="16dp"
-        android:background="@android:drawable/editbox_background"
-        android:textColor="#000000"
-        android:textColorHint="#666666"/>
+        android:background="@android:drawable/editbox_background" />
 
     <Button
         android:id="@+id/login_button"
