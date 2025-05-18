@@ -59,29 +59,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         registerButton.setOnClickListener {
-            val email = emailInput.text.toString().trim()
-            val password = passwordInput.text.toString().trim()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập email và mật khẩu", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Log.d("LoginActivity", "Đăng ký thành công")
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
-                    } else {
-                        Log.e("LoginActivity", "Đăng ký thất bại: ${task.exception?.message}")
-                        Toast.makeText(
-                            this,
-                            "Đăng ký thất bại: ${task.exception?.message}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         googleSignInButton.setOnClickListener {
