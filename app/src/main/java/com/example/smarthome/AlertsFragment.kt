@@ -1,9 +1,12 @@
 package com.example.smarthome
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +15,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import android.util.Log
-import android.widget.TextView
 
 class AlertsFragment : Fragment() {
 
@@ -20,6 +22,7 @@ class AlertsFragment : Fragment() {
     private val alerts = mutableListOf<Alert>()
     private val database = FirebaseDatabase.getInstance("https://smarthome-4e367-default-rtdb.firebaseio.com/")
     private var alertListener: ValueEventListener? = null
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +51,7 @@ class AlertsFragment : Fragment() {
         }
         alertAdapter = AlertAdapter(alerts)
         recyclerView.adapter = alertAdapter
+        Log.d("AlertsFragment", "RecyclerView adapter set with ${alerts.size} items")
 
         observeAlerts(totalAlertsCountText)
 
@@ -64,21 +68,40 @@ class AlertsFragment : Fragment() {
         alertListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Log.d("AlertsFragment", "Data received: ${snapshot.value}")
-                val totalCount = snapshot.children.count() // Tổng số alerts
+                val totalCount = snapshot.children.count()
                 val activeCount = snapshot.children.count { it.child("status").value == "active" }
-                totalAlertsCountText.text = "Tổng số cảnh báo: $totalCount (Đang hoạt động: $activeCount)"
+                handler.post {
+                    totalAlertsCountText.text = "Tổng số cảnh báo: $totalCount (Đang hoạt động: $activeCount)"
+                }
                 Log.d("AlertsFragment", "Total count: $totalCount, Active count: $activeCount")
 
-                val alertList = snapshot.children.mapNotNull { child ->
-                    val alert = child.getValue(Alert::class.java)
-                    alert?.apply { id = child.key ?: "" }
-                    Log.d("AlertsFragment", "Mapped alert: $alert")
-                    alert
-                }.sortedByDescending { it.timestamp }
-                alerts.clear()
-                alerts.addAll(alertList)
-                alertAdapter.updateAlerts(alerts)
-                Log.d("AlertsFragment", "Alerts list size: ${alerts.size}")
+                val alertList = mutableListOf<Alert>()
+                for (child in snapshot.children) {
+                    val deviceId = child.child("deviceId").getValue(String::class.java) ?: continue
+                    val message = child.child("message").getValue(String::class.java) ?: continue
+                    val status = child.child("status").getValue(String::class.java) ?: continue
+                    val timestamp = child.child("timestamp").getValue(String::class.java) ?: continue
+                    val alert = Alert(deviceId, message, status, timestamp).apply { id = child.key ?: "" }
+                    alertList.add(alert)
+                    Log.d("AlertsFragment", "Manually mapped alert: $alert")
+                }
+                alertList.sortByDescending { it.timestamp }
+                Log.d("AlertsFragment", "AlertList size after mapping: ${alertList.size}")
+
+                // Cập nhật trong thread UI
+                handler.post {
+                    alerts.clear()
+                    Log.d("AlertsFragment", "Alerts cleared, size: ${alerts.size}")
+                    alerts.addAll(alertList)
+                    Log.d("AlertsFragment", "Alerts updated, size: ${alerts.size}")
+                    alertAdapter.updateAlerts(alerts.toList())
+                    // Nếu DiffUtil không hoạt động, thử gọi notifyDataSetChanged
+                    if (alerts.isNotEmpty() && alertAdapter.itemCount == 0) {
+                        Log.d("AlertsFragment", "Forcing notifyDataSetChanged due to empty display")
+                        alertAdapter.notifyDataSetChanged()
+                    }
+                    Log.d("AlertsFragment", "Adapter updated with ${alerts.size} items")
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

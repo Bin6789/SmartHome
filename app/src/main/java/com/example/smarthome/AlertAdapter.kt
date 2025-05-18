@@ -25,11 +25,13 @@ class AlertAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlertViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_alert_card, parent, false)
+        Log.d("AlertAdapter", "ViewHolder created for position")
         return AlertViewHolder(view)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AlertViewHolder, position: Int) {
+        Log.d("AlertAdapter", "Binding view holder at position $position")
         val alert = alerts[position]
         holder.deviceIdText.text = "Thiết bị: ${alert.deviceId}"
         holder.messageText.text = "Thông báo: ${alert.message}"
@@ -45,22 +47,25 @@ class AlertAdapter(
             alert.timestamp
         }
         holder.timestampText.text = "Thời gian: $timestampText"
-
-        Log.d("AlertAdapter", "Binding alert at position $position: ${alert.deviceId}, ${alert.message}")
     }
 
     override fun getItemCount(): Int {
-        Log.d("AlertAdapter", "Item count: ${alerts.size}")
-        return alerts.size
+        val count = alerts.size
+        Log.d("AlertAdapter", "Item count: $count")
+        return count
     }
 
     fun updateAlerts(newAlerts: List<Alert>) {
+        Log.d("AlertAdapter", "Received ${newAlerts.size} alerts to update")
         val diffCallback = AlertDiffCallback(alerts, newAlerts)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         alerts.clear()
         alerts.addAll(newAlerts)
         diffResult.dispatchUpdatesTo(this)
-        Log.d("AlertAdapter", "Updated alerts, new size: ${alerts.size}")
+        Log.d("AlertAdapter", "DiffUtil applied, new size: ${alerts.size}")
+        if (alerts.isNotEmpty()) {
+            Log.d("AlertAdapter", "First alert after update: ${alerts[0]}")
+        }
     }
 
     private class AlertDiffCallback(
@@ -70,10 +75,21 @@ class AlertAdapter(
         override fun getOldListSize(): Int = oldList.size
         override fun getNewListSize(): Int = newList.size
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].id == newList[newItemPosition].id
+            val result = oldList.getOrNull(oldItemPosition)?.id == newList.getOrNull(newItemPosition)?.id
+            Log.d("DiffCallback", "areItemsTheSame: old[$oldItemPosition].id=${oldList.getOrNull(oldItemPosition)?.id}, new[$newItemPosition].id=${newList.getOrNull(newItemPosition)?.id}, result=$result")
+            return result
         }
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition] == newList[newItemPosition]
+            val oldItem = oldList.getOrNull(oldItemPosition)
+            val newItem = newList.getOrNull(newItemPosition)
+            val result = oldItem == newItem
+            Log.d("DiffCallback", "areContentsTheSame: old[$oldItemPosition]=$oldItem, new[$newItemPosition]=$newItem, result=$result")
+            return result
+        }
+        override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
+            val oldItem = oldList.getOrNull(oldItemPosition)
+            val newItem = newList.getOrNull(newItemPosition)
+            return if (oldItem != newItem) "UPDATE" else null
         }
     }
 }

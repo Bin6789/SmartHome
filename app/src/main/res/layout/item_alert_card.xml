@@ -12,16 +12,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Device ID"
-        android:textColor="@color/text_grey" />
+        android:textStyle="bold"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/alert_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:text="Message"
-        android:textColor="@color/text_grey" />
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/alert_status"
@@ -29,15 +28,13 @@
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:textStyle="italic"
-        android:text="Satus: N/A"
-        android:textColor="@color/text_grey" />
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/alert_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
-        android:text="Timestamp"
-        android:textColor="@color/text_grey" />
+        android:textColor="#000000" />
 
 </LinearLayout>
