@@ -17,6 +17,10 @@ SmartHome là một dự án quản lý và điều khiển thiết bị nhà th
 - **Backend & Database:** Firebase (Realtime Database/Firestore, Authentication, Cloud Messaging, v.v.)
 - **Realtime Communication:** Firebase Realtime Database/Firestore
 - **MTQ/HTTP:** Giao tiếp với thiết bị IoT
+
+## Demo ứng dụng Youtube: [https://youtu.be/6QbY2vy2Cu0](https://www.youtube.com/watch?v=6QbY2vy2Cu0)
+
+
 ## Hướng dẫn cài đặt
 
 1. **Clone dự án:**
